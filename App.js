@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Alert,
-  Button,
-  PermissionsAndroid,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Alert, Button} from 'react-native';
+import {request, PERMISSIONS} from 'react-native-permissions';
 
 const App = () => {
   const [counter, setCounter] = useState(0);
@@ -17,13 +11,7 @@ const App = () => {
 
   const handlePermissionButtonPress = async () => {
     try {
-      const status = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-        {
-          title: 'Title',
-          message: 'Message',
-        },
-      );
+      const status = await request(PERMISSIONS.ANDROID.CAMERA);
 
       Alert.alert('Permission status', status);
     } catch (error) {
